@@ -1,4 +1,4 @@
-# Infraestrutura de Banco de Dados com RDS e MySQL
+# Infraestrutura de API Gateway na AWS
 
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/FIAP-Grupo56-SOAT1/INFRA_API_GATEWAY_FAST-EATS/main-pipeline.yml?logo=github)
 
