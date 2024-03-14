@@ -1,52 +1,19 @@
-variable "allocated_storage" {
-  description = "The amount of allocated storage."
-  type        = number
-  default     = 20
-}
-variable "storage_type" {
-  description = "type of the storage"
-  type        = string
-  default     = "gp2"
+variable "AWS_REGION" {
+  default = "us-east-1"
 }
 
-variable "instance_class" {
-  description = "The RDS instance class"
-  default     = "db.t2.micro"
-  type        = string
-}
-variable "parameter_group_name" {
-  description = "Name of the DB parameter group to associate"
-  default     = "default.mysql8.0"
-  type        = string
-}
-variable "engine_version" {
-  description = "The engine version"
-  default     = "8.0.34"
-  type        = string
-}
-variable "skip_final_snapshot" {
-  description = "skip snapshot"
-  default     = "true"
-  type        = string
+variable "url_pedido_service" {
+  type    = string
+  default = "load-balancer-pedido-1114194348.us-east-1.elb.amazonaws.com"
 }
 
-variable "identifier" {
-  default = "mysql-pedido"
+variable "stage_prod" {
+  default = "prod"
+  type    = string
 }
 
-variable "backup_retention_period" {
-  default = 0
-}
-
-variable "engine" {
-  default = "mysql"
-}
-
-variable "nome-db-servico" {
-  default = "pedido"
-}
-
-variable "publicly_accessible" {
-  type = bool
-  default = true
+######### OBS: a execution role acima foi trocada por LabRole devido a restricoes de permissao na conta da AWS Academy ########
+variable "execution_role_ecs" {
+  type    = string
+  default = "arn:aws:iam::730335661438:role/LabRole" #aws_iam_role.ecsTaskExecutionRole.arn
 }
