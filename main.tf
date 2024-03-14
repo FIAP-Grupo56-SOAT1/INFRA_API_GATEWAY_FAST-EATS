@@ -10,7 +10,7 @@ terraform {
 
   backend "s3" {
     bucket = "bucket-fiap56-to-remote-state"
-    key    = "aws-rds-pedido-fiap56/terraform.tfstate"
+    key    = "aws-apigateway-fiap56/terraform.tfstate"
     region = "us-east-1"
   }
 }
@@ -22,26 +22,6 @@ provider "aws" {
 resource "aws_default_vpc" "default_vpc" {
 }
 
-#create a security group for RDS Database Instance
-resource "aws_security_group" "rds_sg" {
-  vpc_id        = aws_default_vpc.default_vpc.id
-  name = "rds_bd_${var.nome-db-servico}_sg"
-  ingress {
-    from_port   = 3306
-    to_port     = 3306
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  tags = {
-    Name = "rds_${var.nome-db-servico}_sg"
-  }
-}
 
 # Provide references to your default subnets
 resource "aws_default_subnet" "default_subnet_a" {
@@ -54,48 +34,83 @@ resource "aws_default_subnet" "default_subnet_b" {
   availability_zone = "us-east-1b"
 }
 
-#resource "aws_default_subnet" "default_subnet_c" {
-#  # Use your own region here but reference to subnet 1b
-#  availability_zone = "us-east-1c"
-#}
 
-resource "aws_db_subnet_group" "feasteats_db_subnet_group" {
-  name = "feasteats-${var.nome-db-servico}-db-subnet-group"
-  #subnet_ids = [aws_default_subnet.default_subnet_a.id, aws_default_subnet.default_subnet_b.id, aws_default_subnet.default_subnet_c.id]
-  subnet_ids = [aws_default_subnet.default_subnet_a.id,aws_default_subnet.default_subnet_b.id]
-  tags = {
-    Name = "feasteats-${var.nome-db-servico}-db-subnet-group"
+resource "aws_api_gateway_rest_api" "apigateway" {
+  name        = "fasteats"
+  description = "API Gateway para projeto feasteats"
+  body        = data.template_file.api_gateway.rendered
+
+  endpoint_configuration {
+    types = ["REGIONAL"]
+  }
+
+}
+
+data "template_file" "api_gateway" {
+  template = file("api-gateway-fasteats.yaml")
+
+  vars = {
+    lambda_authorizer_arn = "arn:aws:lambda:us-east-1:730335661438:function:lambda_authorizer"
+    lambda_sts_arn        = "arn:aws:lambda:us-east-1:730335661438:function:lambda_sts"
+    aws_region            = var.AWS_REGION
+    nlbpedido             = var.url_pedido_service
+  }
+
+}
+
+
+resource "aws_api_gateway_deployment" "deployment" {
+  rest_api_id = aws_api_gateway_rest_api.apigateway.id
+
+  triggers = {
+    redeployment = sha1(jsonencode(aws_api_gateway_rest_api.apigateway.body))
+  }
+
+  lifecycle {
+    create_before_destroy = true
   }
 }
 
+resource "aws_api_gateway_stage" "stage" {
+  deployment_id = aws_api_gateway_deployment.deployment.id
+  rest_api_id   = aws_api_gateway_rest_api.apigateway.id
+  depends_on    = [aws_cloudwatch_log_group.log_group]
+  stage_name    = var.stage_prod
+  #auto_deploy       = true
+  access_log_settings {
+    destination_arn = aws_cloudwatch_log_group.log_group.arn
+    format          = "$context.identity.sourceIp $context.identity.caller $context.identity.user [$context.requestTime] \"$context.httpMethod $context.resourcePath $context.protocol\" $context.status $context.responseLength $context.requestId"
 
-
-resource "aws_db_instance" "msyql_rds" {
-
-  allocated_storage       = var.allocated_storage
-  storage_type            = var.storage_type
-  engine                  = var.engine
-  engine_version          = var.engine_version
-  instance_class          = var.instance_class
-  db_name                 = jsondecode(data.aws_secretsmanager_secret_version.mysql_credentials.secret_string)["dbname"]
-  username                = jsondecode(data.aws_secretsmanager_secret_version.mysql_credentials.secret_string)["username"]
-  password                = jsondecode(data.aws_secretsmanager_secret_version.mysql_credentials.secret_string)["password"]
-  port                    = jsondecode(data.aws_secretsmanager_secret_version.mysql_credentials.secret_string)["port"]
-  identifier              = var.identifier
-  parameter_group_name    = var.parameter_group_name
-  db_subnet_group_name    = aws_db_subnet_group.feasteats_db_subnet_group.name
-  skip_final_snapshot     = var.skip_final_snapshot
-  publicly_accessible     = var.publicly_accessible
-  vpc_security_group_ids  = [aws_security_group.rds_sg.id]
-  backup_retention_period = var.backup_retention_period
-  multi_az = false
+  }
 }
 
-data "aws_secretsmanager_secret" "mysql" {
-  name = "prod/soat1grupo56/Pedido"
+#resource "aws_api_gateway_method_settings" "all" {
+#  rest_api_id = aws_api_gateway_rest_api.apigateway.id
+#  stage_name  = aws_api_gateway_stage.stage.stage_name
+#  method_path = "*/*"
+##Off
+#  settings {
+#    logging_level = "OFF"
+#  }
+#  # Errors and Info Logs
+#  #settings {
+#  #  logging_level      = "INFO"
+#  #  metrics_enabled    = true
+#  #  data_trace_enabled = false
+#  #}
+##Full Request and Response Logs
+# # settings {
+# #   logging_level      = "INFO"
+# #   metrics_enabled    = true
+# #   data_trace_enabled = true
+# # }
+#}
+
+resource "aws_cloudwatch_log_group" "log_group" {
+  name              = "/aws/api-gateway/${aws_api_gateway_rest_api.apigateway.name}/${var.stage_prod}"
+  retention_in_days = 1
 }
 
-data "aws_secretsmanager_secret_version" "mysql_credentials" {
-  secret_id = data.aws_secretsmanager_secret.mysql.id
-}
-
+#resource "aws_api_gateway_account" "gateway_account" {
+#  cloudwatch_role_arn = var.execution_role_ecs
+#}
