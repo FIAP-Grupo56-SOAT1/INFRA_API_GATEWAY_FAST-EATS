@@ -478,6 +478,202 @@ paths:
           integration.request.path.cpf: method.request.path.cpf
         passthroughBehavior: when_no_match
         type: http
+#PRODUTOS
+  /produtos:
+    get:
+      tags:
+        - Produto
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: GET
+        uri: "http://${nlbpedido}/produtos"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: when_no_match
+        type: http
+    post:
+      tags:
+        - Produto
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: POST
+        uri: "http://${nlbpedido}/produtos"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: when_no_match
+        type: http
+  /produtos/consultar-por-categoria/{categoriaId}:
+    get:
+      tags:
+        - Produto
+      parameters:
+        - name: categoriaId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: GET
+        uri: "http://${nlbpedido}/produtos/consultar-por-categoria/{categoriaId}"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.categoriaId: method.request.path.categoriaId
+        passthroughBehavior: when_no_match
+        type: http
+  /produtos/consultar-por-nome/{nome}:
+    get:
+      tags:
+        - Produto
+      parameters:
+        - name: nome
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: GET
+        uri: "http://${nlbpedido}/produtos/consultar-por-nome/{nome}"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.nome: method.request.path.nome
+        passthroughBehavior: when_no_match
+        type: http
+  /produtos/{id}:
+    get:
+      tags:
+        - Produto
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: GET
+        uri: "http://${nlbpedido}/produtos/{id}"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.id: method.request.path.id
+        passthroughBehavior: when_no_match
+        type: http
+    delete:
+      tags:
+        - Produto
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: DELETE
+        uri: "http://${nlbpedido}/produtos/{id}"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: '''*'''
+        requestParameters:
+          integration.request.header.Authorization: method.request.header.Authorization
+        passthroughBehavior: when_no_match
+        type: http
+    patch:
+      tags:
+        - Produto
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: PATCH
+        uri: "http://${nlbpedido}/produtos/{id}"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.id: method.request.path.id
+        passthroughBehavior: when_no_match
+        type: http
 
 #COMPONENTES
 components:
