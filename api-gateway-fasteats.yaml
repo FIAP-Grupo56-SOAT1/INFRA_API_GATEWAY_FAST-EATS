@@ -25,6 +25,7 @@ tags:
   - name: STS
     description: Gerar Security token service.
 paths:
+  #STS
   /sts-token:
     post:
       tags:
@@ -45,6 +46,8 @@ paths:
         passthroughBehavior: "when_no_match"
         contentHandling: "CONVERT_TO_TEXT"
         type: "aws"
+
+  #PEDIDOS
   /pedidos:
     get:
       tags:
@@ -246,6 +249,106 @@ paths:
         responses:
           default:
             statusCode: "200"
+        passthroughBehavior: when_no_match
+        type: http
+
+  #PRODUTO PEDIDO
+  /produto-pedido/{idPedido}/produtos:
+    post:
+      tags:
+        - Produto do Pedido
+      parameters:
+        - name: idPedido
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: POST
+        uri: "http://${nlbpedido}/produto-pedido/{idPedido}/produtos"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.idPedido: method.request.path.idPedido
+        passthroughBehavior: when_no_match
+        type: http
+  /produto-pedido/{idPedido}/produtos/{idProduto}:
+    delete:
+      tags:
+        - Produto do Pedido
+      parameters:
+        - name: idPedido
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: idProduto
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: DELETE
+        uri: "http://${nlbpedido}/produto-pedido/{idPedido}/produtos/{idProduto}"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.idProduto: method.request.path.idProduto
+          integration.request.path.idPedido: method.request.path.idPedido
+        passthroughBehavior: when_no_match
+        type: http
+    patch:
+      tags:
+        - Produto do Pedido
+      parameters:
+        - name: idPedido
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: idProduto
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: PATCH
+        uri: "http://${nlbpedido}/produto-pedido/{idPedido}/produtos/{idProduto}"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.idProduto: method.request.path.idProduto
+          integration.request.path.idPedido: method.request.path.idPedido
         passthroughBehavior: when_no_match
         type: http
 
