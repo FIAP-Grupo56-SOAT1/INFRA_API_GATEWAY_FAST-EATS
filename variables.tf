@@ -12,6 +12,17 @@ variable "stage_prod" {
   type    = string
 }
 
+variable "lambda_sts_arn" {
+  default = "arn:aws:lambda:us-east-1:730335661438:function:lambda_sts"
+  type    = string
+}
+
+variable "lambda_authorizer_arn" {
+  default = "arn:aws:lambda:us-east-1:730335661438:function:lambda_authorizer"
+  type    = string
+}
+
+
 ######### OBS: a execution role acima foi trocada por LabRole devido a restricoes de permissao na conta da AWS Academy ########
 variable "execution_role_ecs" {
   type    = string
