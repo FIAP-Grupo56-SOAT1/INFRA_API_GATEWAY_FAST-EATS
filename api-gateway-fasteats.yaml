@@ -7,9 +7,28 @@ servers:
     variables:
       basePath:
         default: "prod"
+tags:
+  - name: Status do Pedido
+    description: Controller que gerencia os status de pedido
+  - name: Categoria
+    description: Controller que gerencia as categorias de produtos.
+  - name: Produto
+    description: Controller que gerencia os produtos
+  - name: Pedido
+    description: Controller que gerencia o processo de criação de um pedido
+  - name: Produto do Pedido
+    description: Controller que gerencia os itens do pedido
+  - name: Cliente
+    description: Controller que gerencia os clientes
+  - name: Gerenciar Pedidos
+    description: Controller que gerencia detalhes de um pedido.
+  - name: STS
+    description: Gerar Security token service.
 paths:
   /sts-token:
     post:
+      tags:
+        - STS
       responses:
         "200":
           description: "200 response"
@@ -28,6 +47,8 @@ paths:
         type: "aws"
   /pedidos:
     get:
+      tags:
+        - Pedido
       parameters:
         - name: Authorization
           in: header
@@ -54,6 +75,8 @@ paths:
         passthroughBehavior: when_no_match
         type: http
     post:
+      tags:
+        - Pedido
       parameters:
         - name: Authorization
           in: header
@@ -81,6 +104,8 @@ paths:
         type: http
   /pedidos/{idPedido}:
     get:
+      tags:
+        - Pedido
       parameters:
         - name: idPedido
           in: path
@@ -107,6 +132,8 @@ paths:
         passthroughBehavior: when_no_match
         type: http
     delete:
+      tags:
+        - Pedido
       parameters:
         - name: idPedido
           in: path
@@ -133,6 +160,8 @@ paths:
         passthroughBehavior: when_no_match
         type: http
     patch:
+      tags:
+        - Pedido
       parameters:
         - name: idPedido
           in: path
@@ -160,6 +189,8 @@ paths:
         type: http
   /pedidos/{idPedido}/cancelar:
     patch:
+      tags:
+        - Pedido
       parameters:
         - name: idPedido
           in: path
@@ -187,6 +218,8 @@ paths:
         type: http
   /pedidos/{idPedido}/confirmar:
     patch:
+      tags:
+        - Pedido
       parameters:
         - name: idPedido
           in: path
