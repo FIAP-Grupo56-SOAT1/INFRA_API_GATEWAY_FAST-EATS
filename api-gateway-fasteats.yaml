@@ -351,6 +351,133 @@ paths:
           integration.request.path.idPedido: method.request.path.idPedido
         passthroughBehavior: when_no_match
         type: http
+#CLIENTES
+  /clientes:
+    get:
+      tags:
+        - Cliente
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: GET
+        uri: "http://${nlbpedido}/clientes"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: when_no_match
+        type: http
+    post:
+      tags:
+        - Cliente
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: POST
+        uri: "http://${nlbpedido}/clientes"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: when_no_match
+        type: http
+  /clientes/{cpf}:
+    get:
+      tags:
+        - Cliente
+      parameters:
+        - name: cpf
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: GET
+        uri: "http://${nlbpedido}/clientes/{cpf}"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.cpf: method.request.path.cpf
+        passthroughBehavior: when_no_match
+        type: http
+    delete:
+      tags:
+        - Cliente
+      parameters:
+        - name: cpf
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: DELETE
+        uri: "http://${nlbpedido}/clientes/{cpf}"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.cpf: method.request.path.cpf
+        passthroughBehavior: when_no_match
+        type: http
+    patch:
+      tags:
+        - Cliente
+      parameters:
+        - name: cpf
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: PATCH
+        uri: "http://${nlbpedido}/clientes/{cpf}"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.cpf: method.request.path.cpf
+        passthroughBehavior: when_no_match
+        type: http
 
 #COMPONENTES
 components:
