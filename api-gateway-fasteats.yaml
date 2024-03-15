@@ -831,6 +831,215 @@ paths:
           integration.request.path.id: method.request.path.id
         passthroughBehavior: when_no_match
         type: http
+  #STATUS DO PEDIDO
+  /status-pedidos:
+    get:
+      tags:
+        - Status do Pedido
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: GET
+        uri: "http://${nlbpedido}/status-pedidos"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: when_no_match
+        type: http
+    post:
+      tags:
+        - Status do Pedido
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: POST
+        uri: "http://${nlbpedido}/status-pedidos"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: when_no_match
+        type: http
+  /status-pedidos/consultar-por-nome/{nome}:
+    get:
+      tags:
+        - Status do Pedido
+      parameters:
+        - name: nome
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: GET
+        uri: "http://${nlbpedido}/status-pedidos/consultar-por-nome/{nome}"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.nome: method.request.path.nome
+        passthroughBehavior: when_no_match
+        type: http
+  /status-pedidos/{id}:
+    get:
+      tags:
+        - Status do Pedido
+      operationId: "get/status-pedidos/{id}"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: GET
+        uri: "http://${nlbpedido}/status-pedidos/{id}"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.id: method.request.path.id
+        passthroughBehavior: when_no_match
+        type: http
+    delete:
+      tags:
+        - Status do Pedido
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: DELETE
+        uri: "http://${nlbpedido}/status-pedidos/{id}"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.id: method.request.path.id
+        passthroughBehavior: when_no_match
+        type: http
+    patch:
+      tags:
+        - Status do Pedido
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: PATCH
+        uri: "http://${nlbpedido}/status-pedidos/{id}"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.id: method.request.path.id
+        passthroughBehavior: when_no_match
+        type: http
+  #GERENCIAR PEDIDOS
+  /gerenciar/pedidos/andamento:
+    get:
+      tags:
+        - Gerenciar Pedidos
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: GET
+        uri: "http://${nlbpedido}/gerenciar/pedidos/andamento"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: when_no_match
+        type: http
+  /gerenciar/pedidos/{id}:
+    get:
+      tags:
+        - Gerenciar Pedidos
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: GET
+        uri: "http://${nlbpedido}/gerenciar/pedidos/{id}"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.id: method.request.path.id
+        passthroughBehavior: when_no_match
+        type: http
+
 #COMPONENTES
 components:
   schemas:
