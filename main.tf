@@ -50,8 +50,8 @@ data "template_file" "api_gateway" {
   template = file("api-gateway-fasteats.yaml")
 
   vars = {
-    lambda_authorizer_arn = "arn:aws:lambda:us-east-1:730335661438:function:lambda_authorizer"
-    lambda_sts_arn        = "arn:aws:lambda:us-east-1:730335661438:function:lambda_sts"
+    lambda_authorizer_arn = var.lambda_authorizer_arn
+    lambda_sts_arn        = var.lambda_sts_arn
     aws_region            = var.AWS_REGION
     nlbpedido             = var.url_pedido_service
   }
@@ -83,6 +83,24 @@ resource "aws_api_gateway_stage" "stage" {
 
   }
 }
+
+resource "aws_lambda_permission" "apigw_sts" {
+    statement_id  = "AllowAPIGatewayInvoke"
+    action        = "lambda:InvokeFunction"
+    function_name = var.lambda_sts_arn
+    principal     = "apigateway.amazonaws.com"
+    source_arn    = "${replace(aws_api_gateway_deployment.deployment.execution_arn, var.stage_prod, "")}*/*"
+}
+
+resource "aws_lambda_permission" "apigw_authorizer" {
+  statement_id  = "AllowAPIGatewayInvoke"
+  action        = "lambda:InvokeFunction"
+  function_name = var.lambda_authorizer_arn
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "${replace(aws_api_gateway_deployment.deployment.execution_arn, var.stage_prod, "")}*/*"
+}
+
+
 
 #resource "aws_api_gateway_method_settings" "all" {
 #  rest_api_id = aws_api_gateway_rest_api.apigateway.id
