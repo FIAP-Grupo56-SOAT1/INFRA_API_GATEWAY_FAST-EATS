@@ -34,6 +34,10 @@ tags:
     description: Controller que gerar o pagamento de um pedido
   - name: Forma de Pagamento
     description: Controller que gerencia as possíveis formas de pagamento de um pedido
+  - name: Produção Pedido
+    description: Controller que gerencia a produção dos pedidos na cozinha
+  - name: Cozinha Pedido
+    description: Controller que gerencia os pedidos na cozinha
 paths:
   #STS
   /sts-token:
@@ -1604,13 +1608,11 @@ paths:
           integration.request.path.id: method.request.path.id
         passthroughBehavior: when_no_match
         type: http
+#GERAR PAGAMENTO
   /gerar-pagamento/pedido/{idPedido}/forma-pagamento/{formaPagamentoId}:
     post:
       tags:
         - Gerar Pagamento
-      summary: Gerar pagamento de pedido
-      description: Gera o pagamento de um pedido.
-      operationId: gerarPagamento
       parameters:
         - name: idPedido
           in: path
@@ -1634,14 +1636,16 @@ paths:
       security:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
-        httpMethod: GET
+        httpMethod: POST
         uri: "${url_pagamento_service}/gerar-pagamento/pedido/{idPedido}/forma-pagamento/{formaPagamentoId}"
         responses:
           default:
             statusCode: "200"
         requestParameters:
-          integration.request.path.id: method.request.path.id
+          integration.request.path.idPedido: method.request.path.idPedido
+          integration.request.path.formaPagamentoId: method.request.path.formaPagamentoId
         passthroughBehavior: when_no_match
+        type: http
 
 #COMPONENTES
 components:
