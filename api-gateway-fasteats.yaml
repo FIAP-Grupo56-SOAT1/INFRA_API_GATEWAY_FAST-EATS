@@ -1646,7 +1646,207 @@ paths:
           integration.request.path.formaPagamentoId: method.request.path.formaPagamentoId
         passthroughBehavior: when_no_match
         type: http
+#PRODUCAO
+  /producao-pedido/{idPedido}/receber-pedido:
+    post:
+      tags:
+        - Produção Pedido
+      parameters:
+        - name: idPedido
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: [ ]
+      x-amazon-apigateway-integration:
+        httpMethod: POST
+        uri: "${url_cozinha_service}/producao-pedido/{idPedido}/receber-pedido"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.idPedido: method.request.path.idPedido
+        passthroughBehavior: when_no_match
+        type: http
 
+  /producao-pedido/{idPedido}/finalizar-preparo:
+    patch:
+      tags:
+        - Produção Pedido
+      parameters:
+        - name: idPedido
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: PATCH
+        uri: "${url_cozinha_service}/producao-pedido/{idPedido}/finalizar-preparo"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.idPedido: method.request.path.idPedido
+        passthroughBehavior: when_no_match
+        type: http
+  /producao-pedido/{idPedido}/iniciar-preparo:
+    patch:
+      tags:
+        - Produção Pedido
+      parameters:
+        - name: idPedido
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: PATCH
+        uri: "${url_cozinha_service}/producao-pedido/{idPedido}/iniciar-preparo"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.idPedido: method.request.path.idPedido
+        passthroughBehavior: when_no_match
+        type: http
+  /producao-pedido/{idPedido}/retirar:
+    patch:
+      tags:
+        - Produção Pedido
+      parameters:
+        - name: idPedido
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: PATCH
+        uri: "${url_cozinha_service}/producao-pedido/{idPedido}/retirar"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.idPedido: method.request.path.idPedido
+        passthroughBehavior: when_no_match
+        type: http
+#COZINHA PEDIDO
+  /cozinha-pedido/{cozinhaId}:
+    get:
+      tags:
+        - Cozinhar Pedido
+      operationId: "get/cozinha-pedido/{cozinhaId}"
+      parameters:
+        - name: cozinhaId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: GET
+        uri: "${url_cozinha_service}/cozinha-pedido/{cozinhaId}"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.id: method.request.path.cozinhaId
+        passthroughBehavior: when_no_match
+        type: http
+  /cozinha-pedido/pedido/{idPedido}:
+    get:
+      tags:
+        - Cozinhar Pedido
+      operationId: "get/cozinha-pedido/pedido/{idPedido}"
+      parameters:
+        - name: idPedido
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: GET
+        uri: "${url_cozinha_service}/cozinha-pedido/pedido/{idPedido}"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.id: method.request.path.idPedido
+        passthroughBehavior: when_no_match
+        type: http
+  /cozinha-pedido:
+    get:
+      tags:
+        - Cozinhar Pedido
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: GET
+        uri: "${url_cozinha_service}/cozinha-pedido"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: when_no_match
+        type: http
 #COMPONENTES
 components:
   schemas:
