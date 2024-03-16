@@ -24,6 +24,16 @@ tags:
     description: Controller que gerencia detalhes de um pedido.
   - name: STS
     description: Gerar Security token service.
+  - name: Pagamentos
+    description: Controller que gerencia as ações possíveis do pagamento de um pedido
+  - name: Pagamento Externo
+    description: Controller que gerencia as ações possíveis de integracao com pagamento externo
+  - name: Status de Pagamento
+    description: Controller que gerencia os status de pagemento de um produto
+  - name: Gerar Pagamento
+    description: Controller que gerar o pagamento de um pedido
+  - name: Forma de Pagamento
+    description: Controller que gerencia as possíveis formas de pagamento de um pedido
 paths:
   #STS
   /sts-token:
@@ -351,7 +361,7 @@ paths:
           integration.request.path.idPedido: method.request.path.idPedido
         passthroughBehavior: when_no_match
         type: http
-#CLIENTES
+  #CLIENTES
   /clientes:
     get:
       tags:
@@ -478,7 +488,7 @@ paths:
           integration.request.path.cpf: method.request.path.cpf
         passthroughBehavior: when_no_match
         type: http
-#PRODUTOS
+  #PRODUTOS
   /produtos:
     get:
       tags:
@@ -674,7 +684,7 @@ paths:
           integration.request.path.id: method.request.path.id
         passthroughBehavior: when_no_match
         type: http
-#CATEGORIAS
+  #CATEGORIAS
   /categorias:
     get:
       tags:
@@ -1039,6 +1049,8 @@ paths:
           integration.request.path.id: method.request.path.id
         passthroughBehavior: when_no_match
         type: http
+
+
 
 #COMPONENTES
 components:

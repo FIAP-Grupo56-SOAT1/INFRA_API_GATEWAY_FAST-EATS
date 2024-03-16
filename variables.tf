@@ -2,9 +2,19 @@ variable "AWS_REGION" {
   default = "us-east-1"
 }
 
+variable "url_pagamento_service" {
+  type    = string
+  default = "http://ecs-fasteats-api-pagamento-399390289.us-west-2.elb.amazonaws.com"
+}
+
+variable "url_cozinha_service" {
+  type    = string
+  default = "http://ecs-fasteats-api-cozinha-399390289.us-west-2.elb.amazonaws.com"
+}
+
 variable "url_pedido_service" {
   type    = string
-  default = "load-balancer-pedido-1114194348.us-east-1.elb.amazonaws.com"
+  default = "http://ecs-fasteats-api-pedido-399390289.us-west-2.elb.amazonaws.com"
 }
 
 variable "stage_prod" {
