@@ -32,8 +32,9 @@ data "template_file" "api_gateway" {
     lambda_authorizer_arn       = var.lambda_authorizer_arn
     lambda_sts_arn                  = var.lambda_sts_arn
     aws_region                        = var.AWS_REGION
-    nlbpedido                          = "load-balancer-pedido-1114194348.us-east-1.elb.amazonaws.com"
-    url_pagamento_service      = "http://load-balancer-pagamento-693861571.us-east-1.elb.amazonaws.com"
+    url_pedido_service             = var.url_pedido_service
+    url_pagamento_service      = var.url_pagamento_service
+    url_cozinha_service           = var.url_cozinha_service
   }
 
 }

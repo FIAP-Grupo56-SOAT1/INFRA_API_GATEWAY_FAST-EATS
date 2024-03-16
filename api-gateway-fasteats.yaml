@@ -79,7 +79,7 @@ paths:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: GET
-        uri: "http://${nlbpedido}/pedidos"
+        uri: "${url_pedido_service}/pedidos"
         responses:
           default:
             statusCode: "200"
@@ -107,7 +107,7 @@ paths:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: POST
-        uri: "http://${nlbpedido}/pedidos"
+        uri: "${url_pedido_service}/pedidos"
         responses:
           default:
             statusCode: "200"
@@ -136,7 +136,7 @@ paths:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: GET
-        uri: "http://${nlbpedido}/pedidos/{idPedido}"
+        uri: "${url_pedido_service}/pedidos/{idPedido}"
         responses:
           default:
             statusCode: "200"
@@ -164,7 +164,7 @@ paths:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: DELETE
-        uri: "http://${nlbpedido}/pedidos/{idPedido}"
+        uri: "${url_pedido_service}/pedidos/{idPedido}"
         responses:
           default:
             statusCode: "200"
@@ -192,7 +192,7 @@ paths:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: PATCH
-        uri: "http://${nlbpedido}/pedidos/{idPedido}"
+        uri: "${url_pedido_service}/pedidos/{idPedido}"
         responses:
           default:
             statusCode: "200"
@@ -221,7 +221,7 @@ paths:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: PATCH
-        uri: "http://${nlbpedido}/pedidos/{idPedido}/cancelar"
+        uri: "${url_pedido_service}/pedidos/{idPedido}/cancelar"
         responses:
           default:
             statusCode: "200"
@@ -255,7 +255,7 @@ paths:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: PATCH
-        uri: "http://${nlbpedido}/pedidos/{idPedido}/confirmar"
+        uri: "${url_pedido_service}/pedidos/{idPedido}/confirmar"
         responses:
           default:
             statusCode: "200"
@@ -284,7 +284,7 @@ paths:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: POST
-        uri: "http://${nlbpedido}/produto-pedido/{idPedido}/produtos"
+        uri: "${url_pedido_service}/produto-pedido/{idPedido}/produtos"
         responses:
           default:
             statusCode: "200"
@@ -318,7 +318,7 @@ paths:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: DELETE
-        uri: "http://${nlbpedido}/produto-pedido/{idPedido}/produtos/{idProduto}"
+        uri: "${url_pedido_service}/produto-pedido/{idPedido}/produtos/{idProduto}"
         responses:
           default:
             statusCode: "200"
@@ -352,7 +352,7 @@ paths:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: PATCH
-        uri: "http://${nlbpedido}/produto-pedido/{idPedido}/produtos/{idProduto}"
+        uri: "${url_pedido_service}/produto-pedido/{idPedido}/produtos/{idProduto}"
         responses:
           default:
             statusCode: "200"
@@ -377,7 +377,7 @@ paths:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: GET
-        uri: "http://${nlbpedido}/clientes"
+        uri: "${url_pedido_service}/clientes"
         responses:
           default:
             statusCode: "200"
@@ -397,7 +397,7 @@ paths:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: POST
-        uri: "http://${nlbpedido}/clientes"
+        uri: "${url_pedido_service}/clientes"
         responses:
           default:
             statusCode: "200"
@@ -424,7 +424,7 @@ paths:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: GET
-        uri: "http://${nlbpedido}/clientes/{cpf}"
+        uri: "${url_pedido_service}/clientes/{cpf}"
         responses:
           default:
             statusCode: "200"
@@ -452,7 +452,7 @@ paths:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: DELETE
-        uri: "http://${nlbpedido}/clientes/{cpf}"
+        uri: "${url_pedido_service}/clientes/{cpf}"
         responses:
           default:
             statusCode: "200"
@@ -480,7 +480,7 @@ paths:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: PATCH
-        uri: "http://${nlbpedido}/clientes/{cpf}"
+        uri: "${url_pedido_service}/clientes/{cpf}"
         responses:
           default:
             statusCode: "200"
@@ -504,7 +504,7 @@ paths:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: GET
-        uri: "http://${nlbpedido}/produtos"
+        uri: "${url_pedido_service}/produtos"
         responses:
           default:
             statusCode: "200"
@@ -524,7 +524,7 @@ paths:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: POST
-        uri: "http://${nlbpedido}/produtos"
+        uri: "${url_pedido_service}/produtos"
         responses:
           default:
             statusCode: "200"
@@ -551,7 +551,7 @@ paths:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: GET
-        uri: "http://${nlbpedido}/produtos/consultar-por-categoria/{categoriaId}"
+        uri: "${url_pedido_service}/produtos/consultar-por-categoria/{categoriaId}"
         responses:
           default:
             statusCode: "200"
@@ -580,7 +580,7 @@ paths:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: GET
-        uri: "http://${nlbpedido}/produtos/consultar-por-nome/{nome}"
+        uri: "${url_pedido_service}/produtos/consultar-por-nome/{nome}"
         responses:
           default:
             statusCode: "200"
@@ -609,7 +609,7 @@ paths:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: GET
-        uri: "http://${nlbpedido}/produtos/{id}"
+        uri: "${url_pedido_service}/produtos/{id}"
         responses:
           default:
             statusCode: "200"
@@ -646,7 +646,7 @@ paths:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: DELETE
-        uri: "http://${nlbpedido}/produtos/{id}"
+        uri: "${url_pedido_service}/produtos/{id}"
         responses:
           default:
             statusCode: "200"
@@ -676,7 +676,7 @@ paths:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: PATCH
-        uri: "http://${nlbpedido}/produtos/{id}"
+        uri: "${url_pedido_service}/produtos/{id}"
         responses:
           default:
             statusCode: "200"
@@ -700,7 +700,7 @@ paths:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: GET
-        uri: "http://${nlbpedido}/categorias"
+        uri: "${url_pedido_service}/categorias"
         responses:
           default:
             statusCode: "200"
@@ -720,7 +720,7 @@ paths:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: POST
-        uri: "http://${nlbpedido}/categorias"
+        uri: "${url_pedido_service}/categorias"
         responses:
           default:
             statusCode: "200"
@@ -747,7 +747,7 @@ paths:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: GET
-        uri: "http://${nlbpedido}/categorias/consultar-por-nome/{nome}"
+        uri: "${url_pedido_service}/categorias/consultar-por-nome/{nome}"
         responses:
           default:
             statusCode: "200"
@@ -777,7 +777,7 @@ paths:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: GET
-        uri: "http://${nlbpedido}/categorias/{id}"
+        uri: "${url_pedido_service}/categorias/{id}"
         responses:
           default:
             statusCode: "200"
@@ -805,7 +805,7 @@ paths:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: DELETE
-        uri: "http://${nlbpedido}/categorias/{id}"
+        uri: "${url_pedido_service}/categorias/{id}"
         responses:
           default:
             statusCode: "200"
@@ -833,7 +833,7 @@ paths:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: PATCH
-        uri: "http://${nlbpedido}/categorias/{id}"
+        uri: "${url_pedido_service}/categorias/{id}"
         responses:
           default:
             statusCode: "200"
@@ -857,7 +857,7 @@ paths:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: GET
-        uri: "http://${nlbpedido}/status-pedidos"
+        uri: "${url_pedido_service}/status-pedidos"
         responses:
           default:
             statusCode: "200"
@@ -877,7 +877,7 @@ paths:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: POST
-        uri: "http://${nlbpedido}/status-pedidos"
+        uri: "${url_pedido_service}/status-pedidos"
         responses:
           default:
             statusCode: "200"
@@ -904,7 +904,7 @@ paths:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: GET
-        uri: "http://${nlbpedido}/status-pedidos/consultar-por-nome/{nome}"
+        uri: "${url_pedido_service}/status-pedidos/consultar-por-nome/{nome}"
         responses:
           default:
             statusCode: "200"
@@ -934,7 +934,7 @@ paths:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: GET
-        uri: "http://${nlbpedido}/status-pedidos/{id}"
+        uri: "${url_pedido_service}/status-pedidos/{id}"
         responses:
           default:
             statusCode: "200"
@@ -962,7 +962,7 @@ paths:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: DELETE
-        uri: "http://${nlbpedido}/status-pedidos/{id}"
+        uri: "${url_pedido_service}/status-pedidos/{id}"
         responses:
           default:
             statusCode: "200"
@@ -990,7 +990,7 @@ paths:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: PATCH
-        uri: "http://${nlbpedido}/status-pedidos/{id}"
+        uri: "${url_pedido_service}/status-pedidos/{id}"
         responses:
           default:
             statusCode: "200"
@@ -1014,7 +1014,7 @@ paths:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: GET
-        uri: "http://${nlbpedido}/gerenciar/pedidos/andamento"
+        uri: "${url_pedido_service}/gerenciar/pedidos/andamento"
         responses:
           default:
             statusCode: "200"
@@ -1041,7 +1041,7 @@ paths:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: GET
-        uri: "http://${nlbpedido}/gerenciar/pedidos/{id}"
+        uri: "${url_pedido_service}/gerenciar/pedidos/{id}"
         responses:
           default:
             statusCode: "200"
@@ -1050,6 +1050,28 @@ paths:
         passthroughBehavior: when_no_match
         type: http
 
+#PAGAMENTOS
+  /pagamentos:
+    get:
+      tags:
+        - Pagamentos
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: GET
+        uri: "${url_pagamento_service}/pagamentos"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: when_no_match
+        type: http
 
 
 #COMPONENTES
