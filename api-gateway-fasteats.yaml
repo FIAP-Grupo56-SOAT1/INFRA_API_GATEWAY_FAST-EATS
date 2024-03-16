@@ -1051,6 +1051,127 @@ paths:
         type: http
 
 #PAGAMENTOS
+  /pagamentos/{id}/alterar-forma-pagamento:
+    put:
+      tags:
+        - Pagamentos
+      parameters:
+        - name: idFormaPagamento
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: [ ]
+      x-amazon-apigateway-integration:
+        httpMethod: PUT
+        uri: "${url_pagamento_service}/pagamentos/{id}/alterar-forma-pagamento"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.id: method.request.path.id
+        passthroughBehavior: when_no_match
+        type: http
+  /pagamentos/{id}/reprocessar-pagamento:
+    post:
+      tags:
+        - Pagamentos
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: POST
+        uri: "${url_pagamento_service}/pagamentos/{id}/reprocessar-pagamento"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.id: method.request.path.id
+        passthroughBehavior: when_no_match
+        type: http
+  /pagamentos/{id}/realizar-pagamento:
+    post:
+      tags:
+        - Pagamentos
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: POST
+        uri: "${url_pagamento_service}/pagamentos/{id}/realizar-pagamento"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.id: method.request.path.id
+        passthroughBehavior: when_no_match
+        type: http
+  /pagamentos/{id}/cancelar-pagamento:
+    post:
+      tags:
+        - Pagamentos
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: POST
+        uri: "${url_pagamento_service}/pagamentos/{id}/cancelar-pagamento"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.id: method.request.path.id
+        passthroughBehavior: when_no_match
+        type: http
   /pagamentos:
     get:
       tags:
@@ -1072,7 +1193,455 @@ paths:
             statusCode: "200"
         passthroughBehavior: when_no_match
         type: http
+  /pagamentos/{id}/consultar-pagamento-por-id-pedido:
+    get:
+      tags:
+        - Pagamentos
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: GET
+        uri: "${url_pagamento_service}/pagamentos/{id}/consultar-pagamento-por-id-pedido"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.id: method.request.path.id
+        passthroughBehavior: when_no_match
+        type: http
 
+  /pagamentos/{id}:
+    get:
+      tags:
+        - Pagamentos
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: GET
+        uri: "${url_pagamento_service}/pagamentos/{id}"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.id: method.request.path.id
+        passthroughBehavior: when_no_match
+        type: http
+  /pagamentos/{id}/consultar-por-id-pagamento-externo:
+    get:
+      tags:
+        - Pagamentos
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: GET
+        uri: "${url_pagamento_service}/pagamentos/{id}/consultar-por-id-pagamento-externo"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.id: method.request.path.id
+        passthroughBehavior: when_no_match
+        type: http
+  /pagamento-externo/mercadopago-webhook:
+    post:
+      tags:
+        - Pagamento Externo
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: POST
+        uri: "${url_pagamento_service}/pagamento-externo/mercadopago-webhook"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: when_no_match
+        type: http
+  /pagamento-externo/mercadopago-webhook-simulacao:
+    post:
+      tags:
+        - Pagamento Externo
+      summary: Webhook para simular retorno pagamento externo
+      description: Webhook para simular retorno de pagamento externo
+      operationId: webhookPagamentoSimulacao
+      parameters:
+        - name: idPagamentoExterno
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: statusMercadoPago
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - APPROVED
+              - REJECTED
+              - CANCELLED
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: POST
+        uri: "${url_pagamento_service}/pagamento-externo/mercadopago-webhook-simulacao"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: when_no_match
+        type: http
+  /pagamento-externo/mercadopago/{idPagamentoExterno}/cancelar:
+    post:
+      tags:
+        - Pagamento Externo
+      parameters:
+        - name: idPagamentoExterno
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: POST
+        uri: "${url_pagamento_service}/pagamento-externo/mercadopago/{idPagamentoExterno}/cancelar"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.idPagamentoExterno: method.request.path.idPagamentoExterno
+        passthroughBehavior: when_no_match
+        type: http
+
+  /status-pagamentos:
+    get:
+      tags:
+        - Status do Pagamento
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: GET
+        uri: "${url_pagamento_service}/status-pagamentos"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: when_no_match
+        type: http
+  /status-pagamentos/{id}:
+    get:
+      tags:
+        - Status do Pagamento
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: GET
+        uri: "${url_pagamento_service}/status-pagamentos/{id}"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: when_no_match
+        type: http
+  /status-pagamentos/consultar-por-nome/{nome}:
+    get:
+      tags:
+        - Status do Pagamento
+      parameters:
+        - name: nome
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: GET
+        uri: "${url_pagamento_service}/status-pagamentos/consultar-por-nome/{nome}"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: when_no_match
+        type: http
+#FORMA DE PAGAMENTO
+  /forma-pagamento:
+    get:
+      tags:
+        - Forma de Pagamento
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: GET
+        uri: "${url_pagamento_service}/forma-pagamento"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: when_no_match
+        type: http
+    post:
+      tags:
+        - Forma de Pagamento
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: POST
+        uri: "${url_pagamento_service}/forma-pagamento"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: when_no_match
+        type: http
+  /forma-pagamento/consultar-por-nome/{nome}:
+    get:
+      tags:
+        - Forma de Pagamento
+      parameters:
+        - name: nome
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: GET
+        uri: "${url_pagamento_service}/forma-pagamento/consultar-por-nome/{nome}"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.nome: method.request.path.nome
+        passthroughBehavior: when_no_match
+        type: http
+  /forma-pagamento/{id}:
+    get:
+      tags:
+        - Forma de Pagamento
+      operationId: "get/forma-pagamento/{id}"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: GET
+        uri: "${url_pagamento_service}/forma-pagamento/{id}"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.id: method.request.path.id
+        passthroughBehavior: when_no_match
+        type: http
+    delete:
+      tags:
+        - Forma de Pagamento
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: DELETE
+        uri: "${url_pagamento_service}/forma-pagamento/{id}"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.id: method.request.path.id
+        passthroughBehavior: when_no_match
+        type: http
+    patch:
+      tags:
+        - Forma de Pagamento
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: PATCH
+        uri: "${url_pagamento_service}/forma-pagamento/{id}"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.id: method.request.path.id
+        passthroughBehavior: when_no_match
+        type: http
+  /gerar-pagamento/pedido/{idPedido}/forma-pagamento/{formaPagamentoId}:
+    post:
+      tags:
+        - Gerar Pagamento
+      summary: Gerar pagamento de pedido
+      description: Gera o pagamento de um pedido.
+      operationId: gerarPagamento
+      parameters:
+        - name: idPedido
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: formaPagamentoId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: GET
+        uri: "${url_pagamento_service}/gerar-pagamento/pedido/{idPedido}/forma-pagamento/{formaPagamentoId}"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.id: method.request.path.id
+        passthroughBehavior: when_no_match
 
 #COMPONENTES
 components:
