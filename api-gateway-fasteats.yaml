@@ -38,6 +38,8 @@ tags:
     description: Controller que gerencia a produção dos pedidos na cozinha
   - name: Cozinha Pedido
     description: Controller que gerencia os pedidos na cozinha
+  - name: Solicitação Usuário
+    description: Controller que gerencia solicitações do usuário
 paths:
   #STS
   /sts-token:
@@ -407,6 +409,36 @@ paths:
             statusCode: "200"
         passthroughBehavior: when_no_match
         type: http
+  /clientes/{id}:
+    get:
+      tags:
+        - Cliente
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: GET
+        uri: "${url_pedido_service}/clientes/{id}"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.cpf: method.request.path.id
+        passthroughBehavior: when_no_match
+        type: http
+
   /clientes/{cpf}/pesquisar-por-cpf:
     get:
       tags:
@@ -436,6 +468,7 @@ paths:
           integration.request.path.cpf: method.request.path.cpf
         passthroughBehavior: when_no_match
         type: http
+  /clientes/{cpf}:
     delete:
       tags:
         - Cliente
@@ -490,6 +523,50 @@ paths:
             statusCode: "200"
         requestParameters:
           integration.request.path.cpf: method.request.path.cpf
+        passthroughBehavior: when_no_match
+        type: http
+  #SOLICITACAO DO USUARIO
+
+  /solicitacao-usuario/desativar-usuario:
+    post:
+      tags:
+        - Solicitação Usuário
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: POST
+        uri: "${url_pedido_service}/solicitacao-usuario/desativar-usuario"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: when_no_match
+        type: http
+  /solicitacao-usuario/excluir-usuario:
+    post:
+      tags:
+        - Solicitação Usuário
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: POST
+        uri: "${url_pedido_service}/solicitacao-usuario/excluir-usuario"
+        responses:
+          default:
+            statusCode: "200"
         passthroughBehavior: when_no_match
         type: http
   #PRODUTOS
