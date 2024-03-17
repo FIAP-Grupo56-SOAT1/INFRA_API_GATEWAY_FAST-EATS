@@ -1608,75 +1608,7 @@ paths:
           integration.request.path.id: method.request.path.id
         passthroughBehavior: when_no_match
         type: http
-#GERAR PAGAMENTO
-  /gerar-pagamento/pedido/{idPedido}/forma-pagamento/{formaPagamentoId}:
-    post:
-      tags:
-        - Gerar Pagamento
-      parameters:
-        - name: idPedido
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
-        - name: formaPagamentoId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
-      responses:
-        "200":
-          description: 200 response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Empty'
-      security:
-        - lambda_authorizador: []
-      x-amazon-apigateway-integration:
-        httpMethod: POST
-        uri: "${url_pagamento_service}/gerar-pagamento/pedido/{idPedido}/forma-pagamento/{formaPagamentoId}"
-        responses:
-          default:
-            statusCode: "200"
-        requestParameters:
-          integration.request.path.idPedido: method.request.path.idPedido
-          integration.request.path.formaPagamentoId: method.request.path.formaPagamentoId
-        passthroughBehavior: when_no_match
-        type: http
 #PRODUCAO
-  /producao-pedido/{idPedido}/receber-pedido:
-    post:
-      tags:
-        - Produção Pedido
-      parameters:
-        - name: idPedido
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: 200 response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Empty'
-      security:
-        - lambda_authorizador: [ ]
-      x-amazon-apigateway-integration:
-        httpMethod: POST
-        uri: "${url_cozinha_service}/producao-pedido/{idPedido}/receber-pedido"
-        responses:
-          default:
-            statusCode: "200"
-        requestParameters:
-          integration.request.path.idPedido: method.request.path.idPedido
-        passthroughBehavior: when_no_match
-        type: http
-
   /producao-pedido/{idPedido}/finalizar-preparo:
     patch:
       tags:
@@ -1768,7 +1700,7 @@ paths:
   /cozinha-pedido/{cozinhaId}:
     get:
       tags:
-        - Cozinhar Pedido
+        - Cozinha Pedido
       operationId: "get/cozinha-pedido/{cozinhaId}"
       parameters:
         - name: cozinhaId
@@ -1798,7 +1730,7 @@ paths:
   /cozinha-pedido/pedido/{idPedido}:
     get:
       tags:
-        - Cozinhar Pedido
+        - Cozinha Pedido
       operationId: "get/cozinha-pedido/pedido/{idPedido}"
       parameters:
         - name: idPedido
@@ -1829,7 +1761,7 @@ paths:
   /cozinha-pedido:
     get:
       tags:
-        - Cozinhar Pedido
+        - Cozinha Pedido
       responses:
         "200":
           description: 200 response
