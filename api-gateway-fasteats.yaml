@@ -1089,6 +1089,36 @@ paths:
           integration.request.path.id: method.request.path.id
         passthroughBehavior: when_no_match
         type: http
+  /pagamentos/{id}/enviar-pedido-pago-cozinha:
+    post:
+      tags:
+        - Pagamentos
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - lambda_authorizador: []
+      x-amazon-apigateway-integration:
+        httpMethod: POST
+        uri: "${url_pagamento_service}/pagamentos/{id}/enviar-pedido-pago-cozinha"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.id: method.request.path.id
+        passthroughBehavior: when_no_match
+        type: http
+
   /pagamentos/{id}/reprocessar-pagamento:
     post:
       tags:
