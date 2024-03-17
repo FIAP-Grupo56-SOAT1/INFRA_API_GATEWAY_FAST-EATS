@@ -35,10 +35,12 @@ data "template_file" "api_gateway" {
     url_pedido_service             = var.url_pedido_service
     url_pagamento_service      = var.url_pagamento_service
     url_cozinha_service           = var.url_cozinha_service
+    authorizer_credentials      = var.execution_role_ecs
   }
 
 }
 
+#    authorizer_credentials      = aws_iam_role.apigw_execution_role.arn
 
 resource "aws_api_gateway_deployment" "deployment" {
   rest_api_id = aws_api_gateway_rest_api.apigateway.id

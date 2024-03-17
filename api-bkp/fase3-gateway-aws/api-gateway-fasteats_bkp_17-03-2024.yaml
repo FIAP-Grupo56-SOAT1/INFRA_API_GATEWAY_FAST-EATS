@@ -80,7 +80,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Empty'
       security:
-        - LambdaAuth: []
+        - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: GET
         uri: "${url_pedido_service}/pedidos"
@@ -1847,7 +1847,6 @@ paths:
             statusCode: "200"
         passthroughBehavior: when_no_match
         type: http
-
 #COMPONENTES
 components:
   schemas:
@@ -1862,9 +1861,6 @@ components:
       x-amazon-apigateway-authtype: "custom"
       x-amazon-apigateway-authorizer:
         authorizerUri: "arn:aws:apigateway:${aws_region}:lambda:path/2015-03-31/functions/${lambda_authorizer_arn}/invocations"
-        authorizerCredentials: "${authorizer_credentials}"
-        authorizerPayloadFormatVersion: '2.0'
         authorizerResultTtlInSeconds: 300
-        enableSimpleResponses: true
         identitySource: "method.request.header.Authorization"
         type: "request"
