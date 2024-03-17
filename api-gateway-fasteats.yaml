@@ -409,7 +409,7 @@ paths:
             statusCode: "200"
         passthroughBehavior: when_no_match
         type: http
-  /clientes/{id}:
+  /clientes/pesquisar-id/{id}:
     get:
       tags:
         - Cliente
@@ -430,7 +430,7 @@ paths:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: GET
-        uri: "${url_pedido_service}/clientes/{id}"
+        uri: "${url_pedido_service}/clientes/pesquisar-id/{id}"
         responses:
           default:
             statusCode: "200"
