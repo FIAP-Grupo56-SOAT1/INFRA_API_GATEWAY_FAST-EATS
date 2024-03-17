@@ -407,7 +407,7 @@ paths:
             statusCode: "200"
         passthroughBehavior: when_no_match
         type: http
-  /clientes/{cpf}:
+  /clientes/{cpf}/pesquisar-por-cpf:
     get:
       tags:
         - Cliente
@@ -428,7 +428,7 @@ paths:
         - lambda_authorizador: []
       x-amazon-apigateway-integration:
         httpMethod: GET
-        uri: "${url_pedido_service}/clientes/{cpf}"
+        uri: "${url_pedido_service}/clientes/{cpf}/pesquisar-por-cpf"
         responses:
           default:
             statusCode: "200"
