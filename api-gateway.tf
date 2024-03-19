@@ -1,24 +1,3 @@
-terraform {
-  required_version = ">= 1.3.0"
-
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "5.23.1"
-    }
-  }
-
-  backend "s3" {
-    bucket = "bucket-fiap56-to-remote-state"
-    key    = "aws-apigateway-fiap56/terraform.tfstate"
-    region = "us-east-1"
-  }
-}
-
-provider "aws" {
-  region = "us-east-1"
-}
-
 resource "aws_default_vpc" "default_vpc" {
 }
 
@@ -47,17 +26,21 @@ resource "aws_api_gateway_rest_api" "apigateway" {
 }
 
 data "template_file" "api_gateway" {
-  template = file("api-gateway-fasteats.yaml")
+  template = file("../../api-gateway-fasteats.yaml")
 
   vars = {
-    lambda_authorizer_arn = var.lambda_authorizer_arn
-    lambda_sts_arn        = var.lambda_sts_arn
-    aws_region            = var.AWS_REGION
-    nlbpedido             = var.url_pedido_service
+    lambda_authorizer_arn       = var.lambda_authorizer_arn
+    lambda_sts_arn                  = var.lambda_sts_arn
+    aws_region                        = var.AWS_REGION
+    url_pedido_service             = var.url_pedido_service
+    url_pagamento_service      = var.url_pagamento_service
+    url_cozinha_service           = var.url_cozinha_service
+    authorizer_credentials      = var.execution_role_ecs
   }
 
 }
 
+#    authorizer_credentials      = aws_iam_role.apigw_execution_role.arn
 
 resource "aws_api_gateway_deployment" "deployment" {
   rest_api_id = aws_api_gateway_rest_api.apigateway.id
@@ -85,11 +68,11 @@ resource "aws_api_gateway_stage" "stage" {
 }
 
 resource "aws_lambda_permission" "apigw_sts" {
-    statement_id  = "AllowAPIGatewayInvoke"
-    action        = "lambda:InvokeFunction"
-    function_name = var.lambda_sts_arn
-    principal     = "apigateway.amazonaws.com"
-    source_arn    = "${replace(aws_api_gateway_deployment.deployment.execution_arn, var.stage_prod, "")}*/*"
+  statement_id  = "AllowAPIGatewayInvoke"
+  action        = "lambda:InvokeFunction"
+  function_name = var.lambda_sts_arn
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "${replace(aws_api_gateway_deployment.deployment.execution_arn, var.stage_prod, "")}*/*"
 }
 
 resource "aws_lambda_permission" "apigw_authorizer" {

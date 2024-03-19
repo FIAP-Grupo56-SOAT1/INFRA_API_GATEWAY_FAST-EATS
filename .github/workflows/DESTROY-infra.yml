@@ -1,6 +1,11 @@
 name: 'DESTROY infra producao'
 on:
   workflow_dispatch:
+    inputs:
+      env:
+        description: 'Environment'
+        required: true
+        default: 'prod'
 
 permissions:
   contents: read
@@ -30,10 +35,16 @@ jobs:
         uses: hashicorp/setup-terraform@v3.0.0
 
       - name: Terraform Init
-        run: terraform init -reconfigure
+        run: |
+          cd ./env/prod/
+          terraform init -reconfigure
 
       - name: Terraform Plan
-        run: terraform plan -input=false
+        run: |
+          cd ./env/prod/ 
+          terraform plan -input=false
 
-      - name: Terraform Destroy
-        run: terraform destroy -auto-approve
+      - name: Terraform Apply
+        run: |
+          cd ./env/prod/
+          terraform destroy -auto-approve
