@@ -4,10 +4,10 @@ info:
   description: "API Gateway para projeto feasteats"
   version: "v.1.0.0"
 servers:
-  - url: "https://mn71pc2qi7.execute-api.us-east-1.amazonaws.com/{basePath}"
-    variables:
-      basePath:
-        default: "prod"
+- url: "https://mn71pc2qi7.execute-api.us-east-1.amazonaws.com/{basePath}"
+  variables:
+    basePath:
+      default: "prod"
 paths:
   /status-pedidos:
     get:
@@ -19,7 +19,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "GET"
         uri: "${url_pedido_service}/status-pedidos"
@@ -37,7 +37,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "POST"
         uri: "${url_pedido_service}/status-pedidos"
@@ -67,11 +67,11 @@ paths:
   /producao-pedido/{idPedido}/finalizar-preparo:
     patch:
       parameters:
-        - name: "idPedido"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "idPedido"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -80,7 +80,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "PATCH"
         uri: "${url_cozinha_service}/producao-pedido/{idPedido}/finalizar-preparo"
@@ -94,16 +94,16 @@ paths:
   /pagamentos/{id}/alterar-forma-pagamento:
     put:
       parameters:
-        - name: "idFormaPagamento"
-          in: "query"
-          required: true
-          schema:
-            type: "string"
-        - name: "id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "idFormaPagamento"
+        in: "query"
+        required: true
+        schema:
+          type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -112,7 +112,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "PUT"
         uri: "${url_pagamento_service}/pagamentos/{id}/alterar-forma-pagamento"
@@ -126,11 +126,11 @@ paths:
   /pagamentos/{id}/reprocessar-pagamento:
     post:
       parameters:
-        - name: "id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -139,7 +139,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "POST"
         uri: "${url_pagamento_service}/pagamentos/{id}/reprocessar-pagamento"
@@ -160,7 +160,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "POST"
         uri: "${url_pedido_service}/solicitacao-usuario/desativar-usuario"
@@ -179,7 +179,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "GET"
         uri: "${url_pedido_service}/categorias"
@@ -197,7 +197,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "POST"
         uri: "${url_pedido_service}/categorias"
@@ -209,11 +209,11 @@ paths:
   /clientes/pesquisar-id/{id}:
     get:
       parameters:
-        - name: "id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -222,7 +222,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "GET"
         uri: "${url_pedido_service}/clientes/pesquisar-id/{id}"
@@ -236,11 +236,11 @@ paths:
   /pagamentos/{id}/consultar-pagamento-por-id-pedido:
     get:
       parameters:
-        - name: "id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -249,7 +249,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "GET"
         uri: "${url_pagamento_service}/pagamentos/{id}/consultar-pagamento-por-id-pedido"
@@ -263,11 +263,11 @@ paths:
   /pagamentos/{id}/cancelar-pagamento:
     post:
       parameters:
-        - name: "id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -276,7 +276,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "POST"
         uri: "${url_pagamento_service}/pagamentos/{id}/cancelar-pagamento"
@@ -290,11 +290,11 @@ paths:
   /producao-pedido/{idPedido}/iniciar-preparo:
     patch:
       parameters:
-        - name: "idPedido"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "idPedido"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -303,7 +303,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "PATCH"
         uri: "${url_cozinha_service}/producao-pedido/{idPedido}/iniciar-preparo"
@@ -317,11 +317,11 @@ paths:
   /gerenciar/pedidos/{id}:
     get:
       parameters:
-        - name: "id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -330,7 +330,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "GET"
         uri: "${url_pedido_service}/gerenciar/pedidos/{id}"
@@ -344,11 +344,11 @@ paths:
   /produto-pedido/{idPedido}/produtos:
     post:
       parameters:
-        - name: "idPedido"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "idPedido"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -357,7 +357,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "POST"
         uri: "${url_pedido_service}/produto-pedido/{idPedido}/produtos"
@@ -371,11 +371,11 @@ paths:
   /pagamentos/{id}/realizar-pagamento:
     post:
       parameters:
-        - name: "id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -384,7 +384,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "POST"
         uri: "${url_pagamento_service}/pagamentos/{id}/realizar-pagamento"
@@ -399,11 +399,11 @@ paths:
     get:
       operationId: "get/cozinha-pedido/{cozinhaId}"
       parameters:
-        - name: "cozinhaId"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "cozinhaId"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -412,7 +412,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "GET"
         uri: "${url_cozinha_service}/cozinha-pedido/{cozinhaId}"
@@ -426,11 +426,11 @@ paths:
   /pedidos/{idPedido}:
     get:
       parameters:
-        - name: "idPedido"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "idPedido"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -439,7 +439,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "GET"
         uri: "${url_pedido_service}/pedidos/{idPedido}"
@@ -452,11 +452,11 @@ paths:
         type: "http"
     delete:
       parameters:
-        - name: "idPedido"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "idPedido"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -465,7 +465,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "DELETE"
         uri: "${url_pedido_service}/pedidos/{idPedido}"
@@ -478,11 +478,11 @@ paths:
         type: "http"
     patch:
       parameters:
-        - name: "idPedido"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "idPedido"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -491,7 +491,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "PATCH"
         uri: "${url_pedido_service}/pedidos/{idPedido}"
@@ -506,16 +506,16 @@ paths:
     post:
       operationId: "webhookPagamentoSimulacao"
       parameters:
-        - name: "idPagamentoExterno"
-          in: "query"
-          required: true
-          schema:
-            type: "string"
-        - name: "statusMercadoPago"
-          in: "query"
-          required: true
-          schema:
-            type: "string"
+      - name: "idPagamentoExterno"
+        in: "query"
+        required: true
+        schema:
+          type: "string"
+      - name: "statusMercadoPago"
+        in: "query"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -524,7 +524,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "POST"
         uri: "${url_pagamento_service}/pagamento-externo/mercadopago-webhook-simulacao"
@@ -546,7 +546,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "GET"
         uri: "${url_pagamento_service}/pagamentos"
@@ -558,11 +558,11 @@ paths:
   /pagamentos/{id}:
     get:
       parameters:
-        - name: "id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -571,7 +571,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "GET"
         uri: "${url_pagamento_service}/pagamentos/{id}"
@@ -585,11 +585,11 @@ paths:
   /pagamentos/{id}/enviar-pedido-pago-cozinha:
     post:
       parameters:
-        - name: "id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -598,7 +598,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "POST"
         uri: "${url_pagamento_service}/pagamentos/{id}/enviar-pedido-pago-cozinha"
@@ -612,11 +612,11 @@ paths:
   /produtos/{id}:
     get:
       parameters:
-        - name: "id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -625,7 +625,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "GET"
         uri: "${url_pedido_service}/produtos/{id}"
@@ -638,16 +638,16 @@ paths:
         type: "http"
     delete:
       parameters:
-        - name: "Authorization"
-          in: "header"
-          required: true
-          schema:
-            type: "string"
-        - name: "id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "Authorization"
+        in: "header"
+        required: true
+        schema:
+          type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -660,7 +660,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "DELETE"
         uri: "${url_pedido_service}/produtos/{id}"
@@ -675,11 +675,11 @@ paths:
         type: "http"
     patch:
       parameters:
-        - name: "id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -688,7 +688,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "PATCH"
         uri: "${url_pedido_service}/produtos/{id}"
@@ -709,7 +709,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "GET"
         uri: "${url_pedido_service}/clientes"
@@ -727,7 +727,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "POST"
         uri: "${url_pedido_service}/clientes"
@@ -739,11 +739,11 @@ paths:
   /pagamentos/{id}/consultar-por-id-pagamento-externo:
     get:
       parameters:
-        - name: "id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -752,7 +752,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "GET"
         uri: "${url_pagamento_service}/pagamentos/{id}/consultar-por-id-pagamento-externo"
@@ -766,11 +766,11 @@ paths:
   /pagamento-externo/mercadopago/{idPagamentoExterno}/cancelar:
     post:
       parameters:
-        - name: "idPagamentoExterno"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "idPagamentoExterno"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -779,7 +779,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "POST"
         uri: "${url_pagamento_service}/pagamento-externo/mercadopago/{idPagamentoExterno}/cancelar"
@@ -793,11 +793,11 @@ paths:
   /status-pagamentos/{id}:
     get:
       parameters:
-        - name: "id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -806,7 +806,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "GET"
         uri: "${url_pagamento_service}/status-pagamentos/{id}"
@@ -825,7 +825,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "GET"
         uri: "${url_pagamento_service}/forma-pagamento"
@@ -843,7 +843,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "POST"
         uri: "${url_pagamento_service}/forma-pagamento"
@@ -855,11 +855,11 @@ paths:
   /pedidos:
     get:
       parameters:
-        - name: "Authorization"
-          in: "header"
-          required: true
-          schema:
-            type: "string"
+      - name: "Authorization"
+        in: "header"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -868,7 +868,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "GET"
         uri: "${url_pedido_service}/pedidos"
@@ -881,11 +881,11 @@ paths:
         type: "http"
     post:
       parameters:
-        - name: "Authorization"
-          in: "header"
-          required: true
-          schema:
-            type: "string"
+      - name: "Authorization"
+        in: "header"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -894,7 +894,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "POST"
         uri: "${url_pedido_service}/pedidos"
@@ -915,7 +915,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "GET"
         uri: "${url_cozinha_service}/cozinha-pedido"
@@ -934,7 +934,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "GET"
         uri: "${url_pagamento_service}/status-pagamentos"
@@ -946,16 +946,16 @@ paths:
   /pedidos/{idPedido}/confirmar:
     patch:
       parameters:
-        - name: "idPedido"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-        - name: "tipoPagamentoId"
-          in: "query"
-          required: true
-          schema:
-            type: "string"
+      - name: "idPedido"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      - name: "tipoPagamentoId"
+        in: "query"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -964,7 +964,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "PATCH"
         uri: "${url_pedido_service}/pedidos/{idPedido}/confirmar"
@@ -979,11 +979,11 @@ paths:
   /producao-pedido/{idPedido}/retirar:
     patch:
       parameters:
-        - name: "idPedido"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "idPedido"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -992,7 +992,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "PATCH"
         uri: "${url_cozinha_service}/producao-pedido/{idPedido}/retirar"
@@ -1006,11 +1006,11 @@ paths:
   /forma-pagamento/consultar-por-nome/{nome}:
     get:
       parameters:
-        - name: "nome"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "nome"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -1019,7 +1019,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "GET"
         uri: "${url_pagamento_service}/forma-pagamento/consultar-por-nome/{nome}"
@@ -1033,11 +1033,11 @@ paths:
   /categorias/consultar-por-nome/{nome}:
     get:
       parameters:
-        - name: "nome"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "nome"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -1046,7 +1046,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "GET"
         uri: "${url_pedido_service}/categorias/consultar-por-nome/{nome}"
@@ -1060,11 +1060,11 @@ paths:
   /produtos/consultar-por-categoria/{categoriaId}:
     get:
       parameters:
-        - name: "categoriaId"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "categoriaId"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -1073,7 +1073,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "GET"
         uri: "${url_pedido_service}/produtos/consultar-por-categoria/{categoriaId}"
@@ -1087,16 +1087,16 @@ paths:
   /produto-pedido/{idPedido}/produtos/{idProduto}:
     delete:
       parameters:
-        - name: "idPedido"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-        - name: "idProduto"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "idPedido"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      - name: "idProduto"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -1105,7 +1105,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "DELETE"
         uri: "${url_pedido_service}/produto-pedido/{idPedido}/produtos/{idProduto}"
@@ -1119,16 +1119,16 @@ paths:
         type: "http"
     patch:
       parameters:
-        - name: "idPedido"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-        - name: "idProduto"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "idPedido"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      - name: "idProduto"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -1137,7 +1137,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "PATCH"
         uri: "${url_pedido_service}/produto-pedido/{idPedido}/produtos/{idProduto}"
@@ -1153,11 +1153,11 @@ paths:
     get:
       operationId: "get/cozinha-pedido/pedido/{idPedido}"
       parameters:
-        - name: "idPedido"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "idPedido"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -1166,7 +1166,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "GET"
         uri: "${url_cozinha_service}/cozinha-pedido/pedido/{idPedido}"
@@ -1180,11 +1180,11 @@ paths:
   /status-pagamentos/consultar-por-nome/{nome}:
     get:
       parameters:
-        - name: "nome"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "nome"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -1193,7 +1193,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "GET"
         uri: "${url_pagamento_service}/status-pagamentos/consultar-por-nome/{nome}"
@@ -1205,11 +1205,11 @@ paths:
   /produtos/consultar-por-nome/{nome}:
     get:
       parameters:
-        - name: "nome"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "nome"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -1218,7 +1218,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "GET"
         uri: "${url_pedido_service}/produtos/consultar-por-nome/{nome}"
@@ -1239,7 +1239,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "POST"
         uri: "${url_pedido_service}/solicitacao-usuario/excluir-usuario"
@@ -1258,7 +1258,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "POST"
         uri: "${url_pagamento_service}/pagamento-externo/mercadopago-webhook"
@@ -1277,7 +1277,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "GET"
         uri: "${url_pedido_service}/produtos"
@@ -1295,7 +1295,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "POST"
         uri: "${url_pedido_service}/produtos"
@@ -1307,11 +1307,11 @@ paths:
   /status-pedidos/consultar-por-nome/{nome}:
     get:
       parameters:
-        - name: "nome"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "nome"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -1320,7 +1320,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "GET"
         uri: "${url_pedido_service}/status-pedidos/consultar-por-nome/{nome}"
@@ -1335,11 +1335,11 @@ paths:
     get:
       operationId: "get/status-pedidos/{id}"
       parameters:
-        - name: "id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -1348,7 +1348,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "GET"
         uri: "${url_pedido_service}/status-pedidos/{id}"
@@ -1361,11 +1361,11 @@ paths:
         type: "http"
     delete:
       parameters:
-        - name: "id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -1374,7 +1374,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "DELETE"
         uri: "${url_pedido_service}/status-pedidos/{id}"
@@ -1387,11 +1387,11 @@ paths:
         type: "http"
     patch:
       parameters:
-        - name: "id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -1400,7 +1400,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "PATCH"
         uri: "${url_pedido_service}/status-pedidos/{id}"
@@ -1421,7 +1421,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "GET"
         uri: "${url_pedido_service}/gerenciar/pedidos/andamento"
@@ -1434,11 +1434,11 @@ paths:
     get:
       operationId: "get/forma-pagamento/{id}"
       parameters:
-        - name: "id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -1447,7 +1447,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "GET"
         uri: "${url_pagamento_service}/forma-pagamento/{id}"
@@ -1460,11 +1460,11 @@ paths:
         type: "http"
     delete:
       parameters:
-        - name: "id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -1473,7 +1473,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "DELETE"
         uri: "${url_pagamento_service}/forma-pagamento/{id}"
@@ -1486,11 +1486,11 @@ paths:
         type: "http"
     patch:
       parameters:
-        - name: "id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -1499,7 +1499,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "PATCH"
         uri: "${url_pagamento_service}/forma-pagamento/{id}"
@@ -1514,11 +1514,11 @@ paths:
     get:
       operationId: "get/categorias/{id}"
       parameters:
-        - name: "id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -1527,7 +1527,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "GET"
         uri: "${url_pedido_service}/categorias/{id}"
@@ -1540,11 +1540,11 @@ paths:
         type: "http"
     delete:
       parameters:
-        - name: "id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -1553,7 +1553,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "DELETE"
         uri: "${url_pedido_service}/categorias/{id}"
@@ -1566,11 +1566,11 @@ paths:
         type: "http"
     patch:
       parameters:
-        - name: "id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -1579,7 +1579,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "PATCH"
         uri: "${url_pedido_service}/categorias/{id}"
@@ -1593,11 +1593,11 @@ paths:
   /pedidos/{idPedido}/cancelar:
     patch:
       parameters:
-        - name: "idPedido"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "idPedido"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -1606,7 +1606,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "PATCH"
         uri: "${url_pedido_service}/pedidos/{idPedido}/cancelar"
@@ -1620,11 +1620,11 @@ paths:
   /clientes/{cpf}:
     get:
       parameters:
-        - name: "cpf"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "cpf"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -1633,7 +1633,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "GET"
         uri: "${url_pedido_service}/clientes/{cpf}"
@@ -1646,11 +1646,11 @@ paths:
         type: "http"
     delete:
       parameters:
-        - name: "cpf"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "cpf"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -1659,7 +1659,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "DELETE"
         uri: "${url_pedido_service}/clientes/{cpf}"
@@ -1672,11 +1672,11 @@ paths:
         type: "http"
     patch:
       parameters:
-        - name: "cpf"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
+      - name: "cpf"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
@@ -1685,7 +1685,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
       security:
-        - lambda-authorizer: []
+      - lambda-authorizer: []
       x-amazon-apigateway-integration:
         httpMethod: "PATCH"
         uri: "${url_pedido_service}/clientes/{cpf}"
